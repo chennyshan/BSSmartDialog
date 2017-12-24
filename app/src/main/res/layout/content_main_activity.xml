@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="60dp">
+
+        <Button
+            android:id="@+id/id_showShareDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="showCustomLayoutId"
+            android:text="自定义layout(Activity)" />
+
+        <Button
+            android:id="@+id/id_showMaterialDesignAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showMaterialDesignAlert"
+            android:text="Material Design alert(Activity)" />
+
+        <Button
+            android:id="@+id/id_showQueueAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showQueueDialog"
+            android:text="排队alert(Activity)" />
+
+        <Button
+            android:id="@+id/id_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="pushFragmentActivity"
+            android:text="Fragment Activity" />
+
+    </LinearLayout>
+
+</ScrollView>
