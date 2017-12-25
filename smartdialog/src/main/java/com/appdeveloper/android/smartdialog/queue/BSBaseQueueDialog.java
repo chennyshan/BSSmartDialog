@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 
-import com.appdeveloper.android.smartdialog.BSSmartDialog;
+import com.appdeveloper.android.smartdialog.BSRestorableDialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by shanchengyu on 12/21/17.
  */
 
-public abstract class BSBaseQueueDialog extends BSSmartDialog {
+public abstract class BSBaseQueueDialog extends BSRestorableDialog {
     public static final String QUEUE_CATEGORY_KEY = "QUEUE_CATEGORY_KEY";
     private int mHostHashCode;
     static Map<String, BSDialogQueueCenter> mDialogCategoryToQueueCenterMap;

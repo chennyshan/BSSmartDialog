@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,7 @@ import android.view.WindowManager;
 
 import junit.framework.Assert;
 
-public class BSSmartDialog extends DialogFragment {
+public class BSSmartDialog extends BSRestorableDialog {
     private static final String Margin = "margin";
     private static final String Width = "width";
     private static final String Height = "height";
@@ -25,21 +23,17 @@ public class BSSmartDialog extends DialogFragment {
     private static final String Bottom = "show_bottom";
     private static final String AnimStyle = "anim_style";
 
-    private static final String AutoRestore = "AutoRestore";
     private static final String LayoutId = "LayoutId";
 
     private OnSmartDialogCreateListener mOnSmartDialogCreateListener;
     @LayoutRes
     protected int layoutId;
 
-    private boolean mAutoRestore;
-
     private int margin;//左右边距
     private int width;
     private int height;
     private float dimAmount = 0.5f;
     private boolean showBottom;//是否底部显示
-    private String tag;
     @StyleRes
     private int animStyle;
 
@@ -59,16 +53,11 @@ public class BSSmartDialog extends DialogFragment {
             dimAmount = savedInstanceState.getFloat(Dim);
             showBottom = savedInstanceState.getBoolean(Bottom);
             animStyle = savedInstanceState.getInt(AnimStyle);
-            mAutoRestore = savedInstanceState.getBoolean(AutoRestore, false);
             layoutId = savedInstanceState.getInt(LayoutId);
-
-            if (!mAutoRestore) {
-                this.dismiss();
-            }
         }
 
         if (isShowFromActivity()) {
-            if (mAutoRestore) {
+            if (isAutoRestore()) {
                 if (mOnSmartDialogCreateListener != null && getActivity() != mOnSmartDialogCreateListener) {
                     Assert.assertTrue("If set 'OnSmartDialogCreateListener', your activity should be set as OnSmartDialogCreateListener:" + getActivity().getClass().getSimpleName(), false);
                 }
@@ -79,7 +68,7 @@ public class BSSmartDialog extends DialogFragment {
             }
         } else {
             Fragment parentFragment = getParentFragment();
-            if (mAutoRestore) {
+            if (isAutoRestore()) {
                 if (mOnSmartDialogCreateListener != null && parentFragment != mOnSmartDialogCreateListener) {
                     Assert.assertTrue("If set 'OnSmartDialogCreateListener', your fragment should be set as OnSmartDialogCreateListener", false);
                 }
@@ -118,7 +107,6 @@ public class BSSmartDialog extends DialogFragment {
         outState.putFloat(Dim, dimAmount);
         outState.putBoolean(Bottom, showBottom);
         outState.putInt(AnimStyle, animStyle);
-        outState.putBoolean(AutoRestore, mAutoRestore);
         outState.putInt(LayoutId, layoutId);
     }
 
@@ -157,37 +145,9 @@ public class BSSmartDialog extends DialogFragment {
         return this;
     }
 
-    public BSSmartDialog setTag(String tag) {
-        this.tag = tag;
-        return this;
-    }
-
-    public BSSmartDialog setAutoRestore(boolean autoRestore) {
-        this.mAutoRestore = autoRestore;
-        return this;
-    }
-
-    public boolean isAutoRestore() {
-        return mAutoRestore;
-    }
-
     public BSSmartDialog setOnSmartDialogCreateListener(OnSmartDialogCreateListener onViewCreateListener) {
         this.mOnSmartDialogCreateListener = onViewCreateListener;
         return this;
-    }
-
-    public BSSmartDialog show(FragmentManager fragmentManager) {
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        if (this.isAdded()) {
-            ft.remove(this).commit();
-        }
-        ft.add(this, tag != null ?  tag : String.valueOf(System.currentTimeMillis()));
-        ft.commit();
-        return this;
-    }
-
-    public boolean isShowFromActivity() {
-        return getParentFragment() == null;
     }
 
     private void initParams() {

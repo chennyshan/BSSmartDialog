@@ -1,27 +1,29 @@
-package com.appdeveloper.android.smartdialog.alertdialog;
+package com.appdeveloper.android.smartdialog.confirmdialog;
 
 import android.content.DialogInterface;
 
-import com.appdeveloper.android.smartdialog.BSSmartDialog;
+import com.appdeveloper.android.smartdialog.BSRestorableDialog;
 import com.appdeveloper.android.smartdialog.queue.BSBaseQueueDialogInfo;
 
 /**
  * Created by shanchengyu on 12/19/17.
  */
 
-public class BSAlertDialogInfo extends BSBaseQueueDialogInfo {
+public class BSConfirmDialogInfo extends BSBaseQueueDialogInfo {
     private CharSequence mTitle, mMessage, mPositiveButtonText, mNegativeButtonText, mNeutralButtonText;
     private DialogInterface.OnClickListener mOnClickListener;
+    private BSStyleParams mStyleParams;
 
-    BSAlertDialogInfo(Object activityOrFragment,
-                      CharSequence title,
-                      CharSequence message,
-                      CharSequence positiveButtonText,
-                      CharSequence negativeButtonText,
-                      CharSequence neutralButtonText,
-                      boolean autoRestore,
-                      DialogInterface.OnClickListener onClickListener,
-                      String tag) {
+    BSConfirmDialogInfo(Object activityOrFragment,
+                        CharSequence title,
+                        CharSequence message,
+                        CharSequence positiveButtonText,
+                        CharSequence negativeButtonText,
+                        CharSequence neutralButtonText,
+                        BSStyleParams styleParams,
+                        boolean autoRestore,
+                        DialogInterface.OnClickListener onClickListener,
+                        String tag) {
         super(activityOrFragment, autoRestore, tag);
         mTitle = title;
         mMessage = message;
@@ -29,16 +31,17 @@ public class BSAlertDialogInfo extends BSBaseQueueDialogInfo {
         mNegativeButtonText = negativeButtonText;
         mNeutralButtonText = neutralButtonText;
         mOnClickListener = onClickListener;
+        mStyleParams = styleParams;
     }
 
     @Override
-    public BSSmartDialog buildDialog() {
-        BSAlertDialog alertDialog = BSAlertDialog.newInstance(mTitle, mMessage, mPositiveButtonText, mNegativeButtonText, mNeutralButtonText, getQueueCategory());
-        alertDialog.setCancelable(false);
-        alertDialog.setTag(getTag()).setAutoRestore(isAutoRestore());
-        alertDialog.setOnClickListener(mOnClickListener);
+    public BSRestorableDialog buildDialog() {
+        BSConfirmDialog dialog = BSConfirmDialog.newInstance(mTitle, mMessage, mPositiveButtonText, mNegativeButtonText, mNeutralButtonText, getQueueCategory(), mStyleParams);
+        dialog.setCancelable(false);
+        dialog.setTag(getTag()).setAutoRestore(isAutoRestore());
+        dialog.setOnClickListener(mOnClickListener);
 
-        return alertDialog;
+        return dialog;
     }
 
     @Override

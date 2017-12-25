@@ -1,6 +1,6 @@
 package com.appdeveloper.android.smartdialog.queue;
 
-import com.appdeveloper.android.smartdialog.BSSmartDialog;
+import com.appdeveloper.android.smartdialog.BSRestorableDialog;
 
 /**
  * Created by shanchengyu on 12/21/17.
@@ -8,5 +8,5 @@ import com.appdeveloper.android.smartdialog.BSSmartDialog;
 
 interface BSQueueDialogInterface {
     String getQueueCategory();
-    BSSmartDialog buildDialog();
+    BSRestorableDialog buildDialog();
 }

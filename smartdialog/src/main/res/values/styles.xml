@@ -11,4 +11,12 @@
         <item name="android:windowEnterAnimation">@anim/enter_anim</item>
         <item name="android:windowExitAnimation">@anim/exit_anim</item>
     </style>
+    <!--<style name="CustomAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+        <!--&lt;!&ndash; Used for the buttons &ndash;&gt;-->
+        <!--<item name="colorAccent">#FF0000</item>-->
+        <!--&lt;!&ndash; Used for the title and text &ndash;&gt;-->
+        <!--<item name="android:textColorPrimary">#91FFFF</item>-->
+        <!--&lt;!&ndash; Used for the background &ndash;&gt;-->
+        <!--<item name="android:background">#FFFFFF</item>-->
+    <!--</style>-->
 </resources>
