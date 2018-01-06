@@ -31,7 +31,7 @@ public class BSConfirmDialog extends BSBaseQueueDialog implements DialogInterfac
 
     DialogInterface.OnClickListener mOnClickListener;
 
-    public static BSConfirmDialog newInstance(@Nullable CharSequence title, @Nullable CharSequence message, @Nullable CharSequence positiveButtonText, @Nullable CharSequence negativeButtonText, @Nullable CharSequence neutralButtonText, String queueCategoryName, BSStyleParams styleParams) {
+    public static BSConfirmDialog newInstance(@Nullable CharSequence title, @Nullable CharSequence message, @Nullable CharSequence positiveButtonText, @Nullable CharSequence negativeButtonText, @Nullable CharSequence neutralButtonText, String queueCategoryName, BSStyleParam styleParams) {
         Bundle bundle = new Bundle();
         bundle.putCharSequence(ConfirmDialog_Title, title);
         bundle.putCharSequence(ConfirmDialog_Message, message);
@@ -97,7 +97,7 @@ public class BSConfirmDialog extends BSBaseQueueDialog implements DialogInterfac
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-                BSStyleParams styleParams = BSConfirmDialog.this.getArguments().getParcelable(ConfirmDialog_StyleParams);
+                BSStyleParam styleParams = BSConfirmDialog.this.getArguments().getParcelable(ConfirmDialog_StyleParams);
                 if (styleParams != null) {
                     // reference: http://blog.csdn.net/y12345654321/article/details/72673270
                     Window window = ((AlertDialog) dialog).getWindow();

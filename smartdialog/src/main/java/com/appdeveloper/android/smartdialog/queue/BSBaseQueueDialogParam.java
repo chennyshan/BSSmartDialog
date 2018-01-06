@@ -6,14 +6,14 @@ import java.lang.ref.WeakReference;
  * Created by shanchengyu on 12/21/17.
  */
 
-public abstract class BSBaseQueueDialogInfo implements BSQueueDialogInterface {
+public abstract class BSBaseQueueDialogParam implements BSQueueDialogInterface {
     private WeakReference<?> mHostWeakRef;
     private boolean mAutoRestore;
     private String mTag;
 
-    public BSBaseQueueDialogInfo(Object activityOrFragment,
-                                 boolean autoRestore,
-                                 String tag) {
+    public BSBaseQueueDialogParam(Object activityOrFragment,
+                                  boolean autoRestore,
+                                  String tag) {
         mHostWeakRef = new WeakReference<>(activityOrFragment);
         mAutoRestore = autoRestore;
         mTag = tag;

@@ -8,7 +8,7 @@ import android.support.annotation.ColorInt;
  * Created by shanchengyu on 12/24/17.
  */
 
-public class BSStyleParams implements Parcelable {
+public class BSStyleParam implements Parcelable {
     private int mTitleColor;
     private float mTitleSize;
 
@@ -17,13 +17,13 @@ public class BSStyleParams implements Parcelable {
 
     private int mPositiveButtonTextColor, mNegativeButtonTextColor, mNeutralButtonTextColor;
 
-    public BSStyleParams() {}
+    public BSStyleParam() {}
 
     public int getTitleColor() {
         return mTitleColor;
     }
 
-    public BSStyleParams setTitleColor(@ColorInt int titleColor) {
+    public BSStyleParam setTitleColor(@ColorInt int titleColor) {
         mTitleColor = titleColor;
         return this;
     }
@@ -32,7 +32,7 @@ public class BSStyleParams implements Parcelable {
         return mTitleSize;
     }
 
-    public BSStyleParams setTitleSize(float titleSize) {
+    public BSStyleParam setTitleSize(float titleSize) {
         mTitleSize = titleSize;
         return this;
     }
@@ -41,7 +41,7 @@ public class BSStyleParams implements Parcelable {
         return mMessageColor;
     }
 
-    public BSStyleParams setMessageColor(@ColorInt int messageColor) {
+    public BSStyleParam setMessageColor(@ColorInt int messageColor) {
         mMessageColor = messageColor;
         return this;
     }
@@ -50,7 +50,7 @@ public class BSStyleParams implements Parcelable {
         return mMessageSize;
     }
 
-    public BSStyleParams setMessageSize(float messageSize) {
+    public BSStyleParam setMessageSize(float messageSize) {
         mMessageSize = messageSize;
         return this;
     }
@@ -59,7 +59,7 @@ public class BSStyleParams implements Parcelable {
         return mPositiveButtonTextColor;
     }
 
-    public BSStyleParams setPositiveButtonTextColor(@ColorInt int positiveButtonTextColor) {
+    public BSStyleParam setPositiveButtonTextColor(@ColorInt int positiveButtonTextColor) {
         mPositiveButtonTextColor = positiveButtonTextColor;
         return this;
     }
@@ -68,7 +68,7 @@ public class BSStyleParams implements Parcelable {
         return mNegativeButtonTextColor;
     }
 
-    public BSStyleParams setNegativeButtonTextColor(int negativeButtonTextColor) {
+    public BSStyleParam setNegativeButtonTextColor(int negativeButtonTextColor) {
         mNegativeButtonTextColor = negativeButtonTextColor;
         return this;
     }
@@ -77,7 +77,7 @@ public class BSStyleParams implements Parcelable {
         return mNeutralButtonTextColor;
     }
 
-    public BSStyleParams setNeutralButtonTextColor(@ColorInt int neutralButtonTextColor) {
+    public BSStyleParam setNeutralButtonTextColor(@ColorInt int neutralButtonTextColor) {
         mNeutralButtonTextColor = neutralButtonTextColor;
         return this;
     }
@@ -98,21 +98,21 @@ public class BSStyleParams implements Parcelable {
         dest.writeInt(mNeutralButtonTextColor);
     }
 
-    public static final Parcelable.Creator<BSStyleParams> CREATOR = new Creator<BSStyleParams>() {
+    public static final Parcelable.Creator<BSStyleParam> CREATOR = new Creator<BSStyleParam>() {
         @Override
-        public BSStyleParams[] newArray(int size)
+        public BSStyleParam[] newArray(int size)
         {
-            return new BSStyleParams[size];
+            return new BSStyleParam[size];
         }
 
         @Override
-        public BSStyleParams createFromParcel(Parcel in)
+        public BSStyleParam createFromParcel(Parcel in)
         {
-            return new BSStyleParams(in);
+            return new BSStyleParam(in);
         }
     };
 
-    public BSStyleParams(Parcel in) {
+    public BSStyleParam(Parcel in) {
         mTitleColor = in.readInt();
         mTitleSize = in.readFloat();
         mMessageColor = in.readInt();

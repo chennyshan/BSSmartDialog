@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.appdeveloper.android.smartdialog.confirmdialog.BSConfirmDialogUtils;
 import com.appdeveloper.android.smartdialog.BSSmartDialog;
+import com.appdeveloper.android.smartdialog.BSSmartDialogUtils;
 import com.appdeveloper.android.smartdialog.BSViewHolder;
-import com.appdeveloper.android.smartdialog.confirmdialog.BSStyleParams;
+import com.appdeveloper.android.smartdialog.confirmdialog.BSStyleParam;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -36,30 +36,30 @@ public class SingleFragmentActivityFragment extends Fragment implements BSSmartD
     }
 
     public void showMaterialDesignAlert(View view) {
-        BSStyleParams params = new BSStyleParams()
+        BSStyleParam params = new BSStyleParam()
                 .setTitleSize(20)
                 .setTitleColor(Color.RED)
                 .setMessageSize(16)
                 .setMessageColor(Color.BLUE)
                 .setPositiveButtonTextColor(Color.parseColor("#889122"));
-        BSConfirmDialogUtils.showAlertDialog(this,
+        BSSmartDialogUtils.showAlertDialog(this,
                 "title1", "怎么理解呢？简单解释：在ScrollView往上滑动时，首先是View把滑动事件“夺走”，由View去执行滑动，直到滑动最小高度后，把这个滑动事件“还”回去，让ScrollView内部去上滑。看个gif感受一下（图中将高度设的比较大:200dp，并将最小高度设置为",
                 "positive", "negative", "neutral", params,
                 true, this, TagMainActivityFragment);
     }
 
     public void showQueueAlert(View view) {
-        BSStyleParams params = new BSStyleParams()
+        BSStyleParam params = new BSStyleParam()
                 .setTitleSize(20)
                 .setTitleColor(Color.RED)
                 .setMessageSize(16)
                 .setMessageColor(Color.BLUE)
                 .setPositiveButtonTextColor(Color.parseColor("#889122"));
-        BSConfirmDialogUtils.showAlertDialog(this,
+        BSSmartDialogUtils.showAlertDialog(this,
                 "title1", "怎么理解呢？简单解释：在ScrollView往上滑动时，首先是View把滑动事件“夺走”，由View去执行滑动，直到滑动最小高度后，把这个滑动事件“还”回去，让ScrollView内部去上滑。看个gif感受一下（图中将高度设的比较大:200dp，并将最小高度设置为",
                 "positive", "negative", "neutral", params,
                 false, null, "Tag_showQueueAlert");
-        BSConfirmDialogUtils.showAlertDialog(this,
+        BSSmartDialogUtils.showAlertDialog(this,
                 "title2", "开发过程中",
                 "positive", null, null, null,
                 false, this, "Tag_showQueueAlert");

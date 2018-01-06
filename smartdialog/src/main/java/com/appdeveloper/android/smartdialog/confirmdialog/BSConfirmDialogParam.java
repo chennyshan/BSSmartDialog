@@ -3,27 +3,27 @@ package com.appdeveloper.android.smartdialog.confirmdialog;
 import android.content.DialogInterface;
 
 import com.appdeveloper.android.smartdialog.BSRestorableDialog;
-import com.appdeveloper.android.smartdialog.queue.BSBaseQueueDialogInfo;
+import com.appdeveloper.android.smartdialog.queue.BSBaseQueueDialogParam;
 
 /**
  * Created by shanchengyu on 12/19/17.
  */
 
-public class BSConfirmDialogInfo extends BSBaseQueueDialogInfo {
+public class BSConfirmDialogParam extends BSBaseQueueDialogParam {
     private CharSequence mTitle, mMessage, mPositiveButtonText, mNegativeButtonText, mNeutralButtonText;
     private DialogInterface.OnClickListener mOnClickListener;
-    private BSStyleParams mStyleParams;
+    private BSStyleParam mStyleParams;
 
-    BSConfirmDialogInfo(Object activityOrFragment,
-                        CharSequence title,
-                        CharSequence message,
-                        CharSequence positiveButtonText,
-                        CharSequence negativeButtonText,
-                        CharSequence neutralButtonText,
-                        BSStyleParams styleParams,
-                        boolean autoRestore,
-                        DialogInterface.OnClickListener onClickListener,
-                        String tag) {
+    public BSConfirmDialogParam(Object activityOrFragment,
+                                CharSequence title,
+                                CharSequence message,
+                                CharSequence positiveButtonText,
+                                CharSequence negativeButtonText,
+                                CharSequence neutralButtonText,
+                                BSStyleParam styleParams,
+                                boolean autoRestore,
+                                DialogInterface.OnClickListener onClickListener,
+                                String tag) {
         super(activityOrFragment, autoRestore, tag);
         mTitle = title;
         mMessage = message;

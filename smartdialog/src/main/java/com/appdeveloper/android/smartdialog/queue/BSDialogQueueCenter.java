@@ -17,15 +17,15 @@ import java.util.Set;
  */
 
 public class BSDialogQueueCenter {
-    private SparseArray<Queue<BSBaseQueueDialogInfo>> mHostHashCodeWithMessageDialogQueueInfoMap = new SparseArray<>();// K:activityOrFragment.hashCode(); V:dialog info queue
+    private SparseArray<Queue<BSBaseQueueDialogParam>> mHostHashCodeWithMessageDialogQueueInfoMap = new SparseArray<>();// K:activityOrFragment.hashCode(); V:dialog info queue
     private Set<Integer> mShowingDialogHostHashCodes = new ArraySet<>();// 如果activity/fragment上有dialog正在显示，则记录下该activity/fragment的hashcode
 
-    public void enqueueDialogInfo(BSBaseQueueDialogInfo dialogInfo) {
-        if (dialogInfo == null || dialogInfo.getHostWeakRef().get() == null) {
+    public void enqueueDialogParam(BSBaseQueueDialogParam dialogParam) {
+        if (dialogParam == null || dialogParam.getHostWeakRef().get() == null) {
             return;
         }
 
-        Object activityOrFragment = dialogInfo.getHostWeakRef().get();
+        Object activityOrFragment = dialogParam.getHostWeakRef().get();
         boolean isValidHost = false;
         if (activityOrFragment instanceof Activity) {
             if (!((Activity)activityOrFragment).isFinishing() && !((Activity)activityOrFragment).isDestroyed()) {
@@ -40,12 +40,12 @@ public class BSDialogQueueCenter {
 
         if (isValidHost) {
             int mapKey = activityOrFragment.hashCode();
-            Queue<BSBaseQueueDialogInfo> msgDialogInfoQueue = mHostHashCodeWithMessageDialogQueueInfoMap.get(mapKey);
-            if (msgDialogInfoQueue == null) {
-                msgDialogInfoQueue = new LinkedList<>();
-                mHostHashCodeWithMessageDialogQueueInfoMap.put(mapKey, msgDialogInfoQueue);
+            Queue<BSBaseQueueDialogParam> msgDialogParamQueue = mHostHashCodeWithMessageDialogQueueInfoMap.get(mapKey);
+            if (msgDialogParamQueue == null) {
+                msgDialogParamQueue = new LinkedList<>();
+                mHostHashCodeWithMessageDialogQueueInfoMap.put(mapKey, msgDialogParamQueue);
             }
-            msgDialogInfoQueue.add(dialogInfo);
+            msgDialogParamQueue.add(dialogParam);
             showNextDialog(mapKey);
         }
     }
@@ -54,12 +54,12 @@ public class BSDialogQueueCenter {
         if (hostIsShowingDialog(mapKey)) {
             return;
         }
-        Queue<BSBaseQueueDialogInfo> msgDialogInfoQueue = mHostHashCodeWithMessageDialogQueueInfoMap.get(mapKey);
-        if (msgDialogInfoQueue != null) {
-            if (!msgDialogInfoQueue.isEmpty()) {
-                BSBaseQueueDialogInfo dialogInfo = msgDialogInfoQueue.poll();
-                while (dialogInfo != null) {
-                    Object context = dialogInfo.getHostWeakRef().get();
+        Queue<BSBaseQueueDialogParam> msgDialogParamQueue = mHostHashCodeWithMessageDialogQueueInfoMap.get(mapKey);
+        if (msgDialogParamQueue != null) {
+            if (!msgDialogParamQueue.isEmpty()) {
+                BSBaseQueueDialogParam dialogParam = msgDialogParamQueue.poll();
+                while (dialogParam != null) {
+                    Object context = dialogParam.getHostWeakRef().get();
                     Activity activity = null;
                     boolean isActivityContext = false;
                     if (context != null) {
@@ -73,7 +73,7 @@ public class BSDialogQueueCenter {
                     if (activity != null && !activity.isFinishing() && !activity.isDestroyed()) {
 //                        confirmDialog.setMargin(60)
                         if (activity instanceof FragmentActivity) {
-                            dialogInfo.buildDialog().show(isActivityContext ? ((FragmentActivity) activity).getSupportFragmentManager() : ((Fragment) context).getChildFragmentManager());
+                            dialogParam.buildDialog().show(isActivityContext ? ((FragmentActivity) activity).getSupportFragmentManager() : ((Fragment) context).getChildFragmentManager());
                         } else {
                             Assert.assertTrue("Only support FragmentActivity(AppCompatActivity), your activity:" + activity.getClass().getSimpleName(), false);
                         }
@@ -81,11 +81,11 @@ public class BSDialogQueueCenter {
                         markHostIsShowDialog(mapKey, true);
                         break;
                     } else {
-                        dialogInfo = msgDialogInfoQueue.poll();
+                        dialogParam = msgDialogParamQueue.poll();
                     }
                 }
 
-                if (msgDialogInfoQueue.isEmpty()) {
+                if (msgDialogParamQueue.isEmpty()) {
                     mHostHashCodeWithMessageDialogQueueInfoMap.remove(mapKey);
                 }
             } else {

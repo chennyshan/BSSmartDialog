@@ -19,12 +19,12 @@ public abstract class BSBaseQueueDialog extends BSRestorableDialog {
     private int mHostHashCode;
     static Map<String, BSDialogQueueCenter> mDialogCategoryToQueueCenterMap;
 
-    public static void showDialog(BSBaseQueueDialogInfo dialogInfo) {
-        if (dialogInfo == null) {
+    public static void showDialog(BSBaseQueueDialogParam dialogParam) {
+        if (dialogParam == null) {
             return;
         }
 
-        String queueCategory = dialogInfo.getQueueCategory();
+        String queueCategory = dialogParam.getQueueCategory();
         if (mDialogCategoryToQueueCenterMap == null) {
             mDialogCategoryToQueueCenterMap = new HashMap<>();
         }
@@ -33,7 +33,7 @@ public abstract class BSBaseQueueDialog extends BSRestorableDialog {
             queueCenter = new BSDialogQueueCenter();
             mDialogCategoryToQueueCenterMap.put(queueCategory, queueCenter);
         }
-        queueCenter.enqueueDialogInfo(dialogInfo);
+        queueCenter.enqueueDialogParam(dialogParam);
     }
 
     @CallSuper
