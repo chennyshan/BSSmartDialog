@@ -1,2 +1,1 @@
-# BSSmartDialog
-基于DialogFragment的智能dialog, 它能够在Activity恢复时自动恢复，并重新连上listener
+参见简书使用说明 https://www.jianshu.com/p/55de934214e4
